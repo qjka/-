@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>遍历_表格统计</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-3.1.0.js"></script>
+    <script>
+        $(function(){
+            // 为按钮添加事件处理函数
+            $("#count-btn").on("click",function(){
+                // 定义变量， 存储统计结果
+                var count = 0;
+                var sum = 0;
+
+                // 遍历tbody中的每个tr
+                $("table tbody").find("tr").each(function(){
+                    // 找到每行第3个单元格 - 单价
+                    var price = parseFloat($(this).find("td").eq(2).text());
+
+                    // 找到每个tr的第4个td - 购买数量
+                    var number = parseInt($(this).find("td").eq(3).text());
+
+                    // 计算小计金额，并填充到第5个单元格
+                    $(this).find("td").eq(4).text(price * number);
+
+                    sum += price * number;      // 累加小计金额
+                    count += number;            // 累加购买数量
+                });
+                // 将统计结果填充到tfoot的第4个单元格
+                $("table tfoot").find("th").eq(3).text(count);
+                // 填充购买总金额到tfoot的第5个单元格
+                $("table tfoot").find("th").eq(4).text(sum);
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            表格统计
+            <button id="count-btn" class="btn btn-info">统计</button>
+        </div>
+
+        <div class="panel-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>商品名称</th>
+                    <th>单价(￥)</th>
+                    <th>购买数量</th>
+                    <th>小计(￥)</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>商品01</td>
+                    <td>28.50</td>
+                    <td>5</td>
+                    <td></td>
+                    <td><a href="#" class="delete">删除</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>商品02</td>
+                    <td>180.00</td>
+                    <td>2</td>
+                    <td></td>
+                    <td><a href="#" class="delete">删除</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>商品03</td>
+                    <td>36.00</td>
+                    <td>5</td>
+                    <td></td>
+                    <td><a href="#" class="delete">删除</a></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>商品04</td>
+                    <td>65.00</td>
+                    <td>1</td>
+                    <td></td>
+                    <td><a href="#" class="delete">删除</a></td>
+                </tr>
+                </tbody>
+
+                <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>总计</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

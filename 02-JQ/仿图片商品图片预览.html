@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.1.0.js"></script>
+    <script>
+        $(function(){
+            // 绑定鼠标移入事件
+            $("#thumbPic").find("li").on("mouseover",function(){
+                // 获取当前小图的src值
+                var smallPicSrc = $(this).find("img").attr("src");
+                // 计算出对应的大图的src值
+                var bigPicSrc = smallPicSrc.replace("50x50","400x400");
+                // 改变大图的src值
+                $("#bigPic").find("img").attr("src",bigPicSrc);
+
+                // 改变当前li的边框颜色//再重置所有li的边框颜色
+                $(this).css("borderColor","red").siblings().css("borderColor","");
+            });
+        });
+    </script>
+    <style>
+        ul{
+            list-style: none; margin:0;padding: 0; 
+        }
+        ul li{
+            float: left;margin:5px;
+            border: 2px solid white;
+            transition: all 0.5s;
+        }
+        ul li img{  display: block;  }
+    </style>
+</head>
+<body>
+<div id="bigPic">
+    <img src="images/TB1_400x400.jpg"/>
+</div>
+<ul id="thumbPic">
+    <li><img src="images/TB1_50x50.jpg"/></li>
+    <li><img src="images/TB2_50x50.jpg"/></li>
+    <li><img src="images/TB3_50x50.jpg"/></li>
+    <li><img src="images/TB4_50x50.jpg"/></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery each方法</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-3.1.0.js"></script>
+    <script>
+        /*
+         动态设置DOM元素的内容，jQuery提供有两个方法：.html(), .text()
+         这两个方法分别对应原生js中的innerHTML属性和innerText属性
+         .html(), .text()也遵循jQuery的方法模式：带参，设置内容；不带参，获取内容。
+
+         获取input输入框的输入值的方法: .val()
+         设置input输入框的值的方法：.val(值)
+         */
+        $(function () {
+            // 为按钮绑定事件处理函数
+            $(".btn").on("click",function(){
+                // 获得用户的输入内容
+                var message = $('input[name="message"]').val();
+                // 将输入内容设为#box的内容
+//                $("#box").html(message);
+                $("#box").text(message);
+ 
+                // 清空输入框
+                $('input[name="message"]').val("");
+            });
+        });
+    </script>
+</head>
+<body class="container">
+<div class="panel panel-primary">
+    <div class="panel-heading">动态改变元素的内容: 使用.html()方法和.text()方法</div>
+    <div class="panel-body">
+        <input type="text" name="message" size="60"/>
+        <button class="btn btn-primary">提交</button>
+        <div id="box"></div>
+    </div>
+</div>
+</body>
+</html>

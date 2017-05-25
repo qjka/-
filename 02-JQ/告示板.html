@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+功能描述:当我们单击一个链接时,应该打开一个light box(灯箱),在它上面我们可以看到用户须知等条款(terms and conditions)
+-->
+<html>
+<head>
+    <title>Light Box</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .text-center{
+            text-align: center;
+        }
+        .light-box,.light-bg{
+            display: none;
+        }
+        .light-bg{
+            background: #000;
+            width: 100%;
+            height: 100%;
+            opacity: .8;
+            position: fixed;
+            left:0;
+            top:0;
+            z-index: 2;
+        } 
+        .light-box{
+            background: #fff;
+            border: solid 10px #333;
+            width: 50%;
+            padding: 1em;
+            position: absolute;
+            left: 50%;
+            top: 10%;
+            margin-left: -25%;
+            z-index: 3;
+        }
+        .close-box{
+            background: #c75f05;
+            color:#fff;
+            font: bold 2em/1 Arial;
+            position: absolute;
+            display: inline-block;
+            right: 0;
+            top: 0;
+            z-index: 4;
+        }
+    </style>
+    <script src="js/jquery-3.1.0.js"></script>
+    <script>
+        $(function(){
+            // 在实际开发中，通常使用a充当按钮
+            // 这时，要阻止超链接默认跳转行为
+            $("a.open-light-window").on("click",function(e){
+                e.preventDefault();     // 阻止默认行为
+                $("div.light-bg").fadeIn(); // 背景淡入
+                $("div.light-box").slideDown();// 灯箱下拉
+            });
+
+            // 关闭按钮
+            $("a.close-box").on("click",function(e){
+                e.preventDefault();
+                $("div.light-bg").fadeOut();    // 背景淡出
+                $("div.light-box").slideUp();   // 灯箱上拉
+            });
+
+            // 当页面刚加载时，显示灯箱(使用事件触发)
+            $("a.open-light-window").trigger("click");
+
+            // 定时关闭
+            setTimeout(function(){
+                $("a.close-box").trigger("click");
+            },3000);
+        });
+    </script>
+</head>
+<body>
+<div class="text-center">
+    <a href="#" class="open-light-window">规则 & 条款</a>
+</div>
+
+<!--告示牌-->
+<div class="light-box">
+    <a href="#" class="close-box">X</a>
+    <h3>:: 规则和条款 ::</h3>
+
+    <p class="text-justify">
+        这是关于公司用户/员工须知的条款,请仔细阅读......
+    </p>
+</div>
+
+<!--背景-->
+<div class="light-bg"></div>
+</body>
+</html>

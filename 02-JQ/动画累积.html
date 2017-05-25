@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.1.0.js"></script>
+    <script src="js/jquery.easing.js"></script>
+    <script>
+        // .stop()方法：停止当前正在执行的动画
+        $(function () {
+            $("#start").on("click",function(){
+                $("#box").animate({"height":"+=300"},3000);
+            });
+            $("#stop").on("click",function(){
+//                $("#box").stop();       // 停止当前正在执行的动画，继续执行队列中剩余的动画
+                $("#box").stop(true);    // 停止当前正在执行的动画。true:清除队列中所有的动画
+            });
+            $("#finish").on("click",function(){
+                $("#box").finish();     // 马上完成当前正在执行的动画
+            });
+        }); 
+    </script>
+    <style>
+        #box{width:300px;height:100px;background-color: teal;}
+    </style>
+</head>
+<body>
+<p>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="finish">Finish</button>
+</p>
+<div id="box"></div>
+</body>
+</html>
