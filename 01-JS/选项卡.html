@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0}
+ul{list-style:none}
+.wrap{ width:500px;}
+a{ text-decoration:none}
+.hide{ display:none}
+.tab { margin-bottom:20px;}
+.tab .tabList{ height:40px;}
+.tab .tabList li{ float:left;}
+.tab .tabList li a{ display:block; padding:0 20px; height:40px; line-height:40px; color:#666}
+.tab .tabList .ac{ background:#ccc; color:#fff}
+/*清除浮动*/
+/*.tab .tabCont{ clear:left}*/
+.tab .tabItem{ border:1px solid #ccc; padding:20px; height:200px}
+</style>
+<script>
+	//需要到页面当中找对象的时候
+	window.onload=function(){//顶级对象（浏览器）
+		function tab(obj,autoRun){                                                        //设置函数运行参数：obj对象aotoRun
+			//var oTab=document.getElementsByClassName('tab')[0];
+			var oUl=obj.getElementsByClassName('tabList')[0];
+			var aLi=oUl.getElementsByTagName('li');
+			var aTabItem=obj.getElementsByClassName('tabItem');
+			var n=0; //定时器用的 计数器
+			var timer;  //定时器用
+			function change(){                                                            //设置切换标签函数change（）
+				for(var j=0; j<aLi.length; j++){aLi[j].className="";aTabItem[j].style.display="none";}
+				aLi[n].className="ac";
+				aTabItem[n].style.display="block";}
+			//----------------------------------------------
+			for(var i=0; i<aLi.length; i++){                                            //点击引用函数change（）切换标签
+				//li绑定事件
+				aLi[i].onclick=function(){n=this.index;change();};
+				//发牌照
+				aLi[i].index=i;}
+			//----------------------------------------------
+			if(autoRun){                                                                 //自动切换
+				function run(){timer=setInterval(function(){n++;if(n==aLi.length){n=0;}change();},1000);}//设置定时器函数run（）
+				//加载时调用
+				run();
+				//--------------------------------------------------
+				obj.onmouseover=function(){clearInterval(timer);};          //清除定时器
+				obj.onmouseout=function(){run();};}}                        //重开定时器
+		//------------------------------------------------------------------------
+		var aTab=document.getElementsByClassName('tab');
+		//传入对象
+		tab(aTab[0],true);//true  数字  “自动运行”
+		tab(aTab[1]);};
+</script>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="tab">
+        <ul class="tabList">
+            <li class="ac"><a href="javascript:;">tabA</a></li>
+            <li><a href="javascript:;">tabB</a></li>
+            <li><a href="javascript:;">tabC</a></li>
+            <li><a href="javascript:;">tabD</a></li>
+        </ul>
+        <div class="tabCont">
+            <div class="tabItem">AAAAAAAAA</div>
+            <div class="tabItem hide">BBBBBBBBB</div>
+            <div class="tabItem hide">CCCCCCCCC</div>
+            <div class="tabItem hide">DDDDDDDDD</div>
+        </div>
+    </div>
+    <div class="tab">
+        <ul class="tabList">
+            <li class="ac"><a href="javascript:;">tabA</a></li>
+            <li><a href="javascript:;">tabB</a></li>
+            <li><a href="javascript:;">tabC</a></li>
+            <li><a href="javascript:;">tabD</a></li>
+        </ul>
+        <div class="tabCont">
+            <div class="tabItem">AAAAAAAAA</div>
+            <div class="tabItem hide">BBBBBBBBB</div>
+            <div class="tabItem hide">CCCCCCCCC</div>
+            <div class="tabItem hide">DDDDDDDDD</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

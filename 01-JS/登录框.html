@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>loginbtn</title>
+    <style>
+        *{margin: 0;padding: 0;text-decoration: none;font-family: Arial, "微软雅黑"}
+        button{width: 100px;height: 30px}
+        .txt{height: 30px;width: 200px;border: #666;border-radius: 5px}
+        .modal{position: fixed;top:0;left: 0;height: 100%;width: 100%;background: black;opacity: .3;display: none}
+        .logbox{width: 500px;height: 200px;background: white;position: absolute;display: none;}
+        .logbox h4{background: #666;height: 40px;line-height: 40px;text-indent: 1em;color: white}
+        .logbox .x{position: absolute;top:10px;right: 10px;color: white}
+        .logbox p{height: 40px;line-height: 40px;padding: 0 20px;text-align: center;background: #ccc}
+        .logbox button{border-radius: 5px}
+        .logbtn{display: block;margin: 100px auto;}
+    </style>
+</head>
+<body>
+<button class="logbtn" id="logbtn" type="button">登录</button>
+<div class="modal"></div>
+<div class="logbox" style="border-radius: 30px;display: block;width: 500px;height: 160px">
+    <h4>请登录</h4> 
+    <form>
+        <p><label >用户名：<input type="text" class="txt"></label></p>
+        <p><label >密　码：<input type="password" class="txt"></label></p>
+        <p><button type="submit">提交</button></p>
+    </form>
+    <a href="#" class="x">X</a>
+</div>
+</body>
+</html>

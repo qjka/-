@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: none;
+            text-decoration: none;
+            font-family: Arial, "微软雅黑"
+        }
+        #box{width: 369px;height: 300px;border: 1px solid #666;position: relative;margin: 100px auto;overflow: hidden}
+        #box p{margin-right: 30px;position: absolute}
+        #box p span{text-indent: 2em}
+        #span{position: absolute;top:0;right:0;width: 20px;height: 50px;background: #ccc;}
+    </style>
+</head>
+<body>
+<div id="box">
+    <p><span>句柄（handle），有多种意义，其中第一种是指程序设计，第二种是指Windows编程。现在大部分都是指程序设计/程序开发这类。</span>
+        <span>第一种解释：句柄是一种特殊的智能指针 。当一个应用程序要引用其他系统（如数据库、操作系统）所管理的内存块或对象时，就要使用句柄。</span>
+        <span>第二种解释：整个Windows编程的基础。一个句柄是指使用的一个唯一的整数值，即一个4字节(64位程序中为8字节)长的数值，来标识应用程序中的不同对象和同类中的不同的实例，诸如，一个窗口，按钮，图标，滚动条，输出设备，控件或者文件等。应用程序能够通过句柄访问相应的对象的信息，但是句柄不是指针，程序不能利用句柄来直接阅读文件中的信息。如果句柄不在I/O文件中，它是毫无用处的。 句柄是Windows用来标志应用程序中建立的或是使用的唯一整数，Windows大量使用了句柄来标识对象。</span></p>
+    <span id="span"></span>
+</div>
+</body>
+</html>
+<script>
+    var div=document.getElementById("box");
+    var span=document.getElementById("span");
+    var p=document.getElementsByTagName("p")[0];
+    span.onmousedown = function (ev) {
+        ev=ev||event;
+        var disy=ev.clientY-span.offsetTop;
+        document.onmousemove=function (ev) {
+            ev=ev||event;
+            var t=ev.clientY-disy;
+            if(t<0){t=0}
+            if(t>div.offsetHeight-span.offsetHeight-2){
+                t=div.offsetHeight-span.offsetHeight-2
+            }
+            span.style.top=t+"px";
+            var rate=t/(div.offsetHeight-span.offsetHeight-2);              //获得隐藏段落与span移动范围的比例
+            p.style.top=-(p.offsetHeight-div.offsetHeight)*rate+"px";       //获得隐藏段落与span移动的相对距离
+        };
+        document.onmouseup=function () {
+            document.onmousemove=null;
+        };
+        return false
+    }
+</script>

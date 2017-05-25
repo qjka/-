@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<input id="cheakAll" type="checkbox">全选
+
+<div>
+<input type="checkbox">
+<input type="checkbox">
+<input type="checkbox">
+<input type="checkbox">
+<input type="checkbox">
+</div>
+
+</body>
+</html>
+<script>
+//找到全选按钮
+
+var oChkAllBtn=document.getElementById('cheakAll');
+var oDiv=document.getElementsByTagName('div')[0];
+var aInput=oDiv.getElementsByTagName('input');
+
+var n=0;  //计数器
+
+//alert(aInput.length);
+
+
+//点击全选按钮，让其他的全部选中
+oChkAllBtn.onclick=function(){
+	
+	//判断我是什么状态
+	/*if(this.checked==true){
+		for(var i=0; i<aInput.length; i++){
+			aInput[i].checked=true;
+		}
+	}else{
+	
+		for(var i=0; i<aInput.length; i++){
+			aInput[i].checked=false;
+		}
+	
+	}*/
+	
+	for(var i=0; i<aInput.length; i++){
+		if(this.checked==true){//判断全选按钮自己的状态
+			aInput[i].checked=true;
+			n=aInput.length; //控制计数器
+		}else{
+			aInput[i].checked=false;
+			n=0; //控制计数器
+		}
+	};
+
+};
+//--------------------------------------------
+
+//每一个按钮绑定事件
+
+for(var j=0; j<aInput.length; j++){
+	aInput[j].onclick=function(){
+		//如果我自己是cheaked状态  n++  否则 n--
+		if(this.checked==true){
+			n++;
+		}else{
+			n--;
+		};
+		//console.log(n);
+		
+		//如果n==aInput.length
+		if(n==aInput.length){
+		
+			oChkAllBtn.checked=true;
+		}else{
+			oChkAllBtn.checked=false;
+		}
+	};
+};
+
+
+
+
+
+
+
+
+</script>

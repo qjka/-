@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p{ height:30px; line-height:30px; font-size:15px;width:20px; overflow:hidden;}
+    </style>
+</head>
+<body>
+<p>这是标准的十五个字</p>
+</body>
+</html>
+<script>
+    var oP=document.getElementsByTagName("p")[0];
+    var i=0;
+    var time;
+    time=setInterval(function(){
+        i+=14;
+        oP.style.width=20+i+"px";
+        if(i>=200){
+            clearInterval(time);
+        } 
+    },100)
+</script>

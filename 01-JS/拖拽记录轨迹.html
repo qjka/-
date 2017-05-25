@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<body>
+<div id="box" style="width:200px; height:200px; background:red; position:absolute">
+</div>
+</body>
+</html>
+<script>
+var oDiv=document.getElementById('box');
+var arr=[];
+oDiv.onmousedown=function(ev){
+	ev=ev || event;
+	var disX=ev.clientX-oDiv.offsetLeft;
+	var disY=ev.clientY-oDiv.offsetTop;
+	document.onmousemove=function(ev){
+		ev=ev||event;
+		var l=ev.clientX-disX;
+		var t=ev.clientY-disY;
+		var json={"left":l,"top":t};
+		arr.push(json);
+		//console.log(arr);
+		oDiv.style.top=t+'px';
+		oDiv.style.left=l+'px';
+	};
+	document.onmouseup=function(){
+		document.onmousemove=null;
+	};
+	return false;
+}; 
+</script>

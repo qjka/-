@@ -1,0 +1,31 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<div id="box" style="width:200px; height:200px; background:red;" ></div>
+</body>
+</html>
+<script>
+var oDiv=document.getElementById('box');
+
+var aSpan=document.getElementsByTagName('span');
+
+
+oDiv.onclick=function(){
+	this.innerHTML="";
+	
+	for(var i=0; i<10;  i++){
+		this.innerHTML+="<span>数据</span><br>";
+	};
+	
+
+
+};
+
+
+
+</script>

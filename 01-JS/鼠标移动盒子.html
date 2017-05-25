@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0}
+    </style>
+</head>
+<body>
+<div style="width: 226px;height: 200px;background: #666;position: absolute;font-size: 0;" id="box">
+    <h3 style="line-height: 30px;height:30px;text-align: center;color: white;font-size: 30px;background: #ccc">00000000</h3>
+    <input type="text" style="width: 226px;border:none;">
+</div>
+</body>
+</html>
+<script>
+//    window.onload=function () {                                                             //可以移动，但是会跑出边界
+//        var div=document.getElementById("box");
+//        div.onmousedown=function () {
+//            document.onmousemove=function (xx) {
+//                xx=xx||window.event;
+//                var x=xx.clientX;
+//                var y=xx.clientY;
+//                div.style.left=x+"px";
+//                div.style.top=y+"px";};
+//            document.onmouseup=function () {document.onmousemove=null}
+//        }
+//    };
+    window.onload=function () {                                                            //解决边界问题
+        var div = document.getElementById("box");
+        var inp = document.getElementsByTagName("input")[0];
+        var ww = document.documentElement.clientWidth;      //屏幕可视宽度
+        var wh = document.documentElement.clientHeight;     //屏幕可视高度
+        var h3 = document.getElementsByTagName("h3")[0];
+//        function drag(obj,title) {                                                       //封装样式
+//            title=titl||obj;
+//            obj.onmousedown = function (xx) {}
+//        }
+        h3.onmousedown = function (xx) {
+            xx = xx || window.event;
+            var disx = xx.clientX - div.offsetLeft;     //鼠标点击X轴坐标-盒子X轴坐标=偏移距离（浏览器自加）
+            var disy = xx.clientY - div.offsetTop;      //~
+            document.onmousemove = function (xx) {
+                xx = xx || window.event;
+                var x = xx.clientX - disx;                  //鼠标屏幕可视宽度-偏移距离=div位置
+                var y = xx.clientY - disy;
+                if (x < 0) {
+                    x = 0
+                }                                                               //先判断
+                if (y < 0) {
+                    y = 0
+                }
+                if (x >= ww - div.offsetWidth) {
+                    x = ww - div.offsetWidth;
+                }
+                if (y >= wh - div.offsetHeight) {
+                    y = wh - div.offsetHeight;
+                }
+//                if(x>=ww-div.offsetWidth){x=ww-div.offsetWidth;}
+//                else if(x<=0){x=0}
+//                if(y>=wh-div.offsetHeight){y=wh-div.offsetHeight;}
+//                else if(y<=0){y=0}
+                div.style.left = x + "px";                                                  //后执行
+                div.style.top = y + "px";
+            };
+            document.onmouseup = function () {
+                document.onmousemove = null
+            };
+            return false;
+        };
+
+        inp.onmousedown = function (xx) {
+            xx = xx || window.event;
+            xx.cancelBubble = true;
+        }
+}
+</script>

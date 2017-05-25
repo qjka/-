@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin: 0;padding: 0;text-decoration: none;list-style: none;font-family: Arial, "微软雅黑"}
+        p{width: 123px;height: 30px;background-color: whitesmoke;margin-bottom: 15px;}
+        li{width: 123px;height: 30px;background-color: honeydew;margin-bottom: 15px;}
+        #lia{width: 123px;height: 30px;background-color: honeydew;margin-bottom: 15px;}
+    </style>
+</head>
+<body>
+<button id="button" type="button">添加元素</button>
+<div id="box" style="background: #ccc">
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <ul><li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li></ul>
+</div>
+</body>
+</html>
+<script>
+        var div=document.getElementById("box");
+        var but=document.getElementById("button");
+        var ul=document.createElement("ul");
+        for(var i=0;i<10;i++){
+            ul.innerHTML+='<li'+(i==3 ? 'id="lia"' : '')+'>'+i+'</li>';
+                            '<li'+(i==3 ? ' id="liA"' : '')+'>'+i+'</li>'
+        }
+        but.onclick=function () {
+            div.appendChild(ul)
+        };
+        div.onclick=function (ev) {
+            ev=ev||window.event;
+            var wp=ev.target||ev.srcElement;
+            if(wp==this){
+                return
+            }
+            if(wp.tagName=="P"||wp.tagName=="LI"){
+                wp.style.background="#999"
+            }
+        } 
+</script>

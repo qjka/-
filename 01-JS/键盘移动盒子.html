@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div style="width: 100px;height: 100px;background: #666;position: absolute" id="box"></div>
+</body>
+</html>
+<script>
+    var div=document.getElementById("box");
+    document.onkeydown=function (xx) {
+        var ww=document.documentElement.clientWidth;
+        var wh=document.documentElement.clientHeight;
+        xx=xx||window.event;
+        //右
+        if(xx.keyCode==39){
+            var bw=div.offsetLeft+10;
+            if(bw>ww-div.offsetWidth){
+                bw=ww-div.offsetWidth;
+                //bw=0 //返回起点
+            }
+            div.style.left=bw+"px";
+        }
+        //下
+        if(xx.keyCode==40){
+            var bw2=div.offsetTop+10;
+            if(bw2>wh-div.offsetHeight){
+                bw2=wh-div.offsetHeight;
+                //bw=0 //返回起点
+            }
+            div.style.top=bw2+"px";
+        }
+        //左
+        if(xx.keyCode==37){
+            var bh=div.offsetLeft-10;
+            if(bh<0){
+                bh=0;
+            }
+            div.style.left=bh+"px";
+        }
+        //上
+        if(xx.keyCode==38){
+            var bh2=div.offsetTop-10;
+            if(bh2<0){
+                bh2=0;
+            }
+            div.style.top=bh2+"px";
+        }
+    }
+</script> 
