@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-3.1.0.js"></script>
+    <script>
+        $(function(){
+            // 为按钮绑定单击事件处理函数
+            $("#ajax-btn").on("click",function(){
+                // 请求的url
+                var url = "http://wthrcdn.etouch.cn/weather_mini?city=北京";
+                // 发起ajax请求
+                $.getJSON(url,function(data){
+                    var content = "天气数据：<br>";
+                    content += "温度：" + data.data.wendu;
+                    content += "<br/>今天是：" + data.data.forecast[0].date;
+                    content += "<br/>天气类型：" + data.data.forecast[0].type;
+                    $("#result").html(content);
+                });
+            });
+        }); 
+    </script>
+</head>
+<body class="container">
+<div class="panel panel-primary">
+    <div class="panel-heading">使用ajax获取商品的信息</div>
+    <div class="panel-body">
+        <button id="ajax-btn" class="btn btn-link">查询</button>
+        <div id="result" class="well"> </div>
+    </div>
+</div>
+</body>
+</html>
