@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性选择器</title>
+    <script src="js/jquery-3.1.0.js"></script>
+    <script>
+        // 各种属性选择器的应用
+        $(function(){
+ 
+            $('a[href$=".html"]').css("color","red");
+
+        });
+    </script>
+</head>
+<body>
+<div>
+    <!--
+    属性选择器：根据指定的属性特征来匹配
+    标签的属性，指的是 href title img的src。#：哈希(hash)符号
+    -->
+    <a href="http://www.163.com">网易</a><br/><!--外链接-->
+    <a href="demo01.html">demo01.html</a><br/><!--站内链接-->
+    <a href="#">haha</a><br/><!--空链接-->
+    <a>sssssssssss</a><br/>
+    <a href="#" title="this is data link">aaaa</a><br/>
+    <a href="#" title="data-link">aaaa</a><br/>
+    <a href="#" title="this is datalink">aaaa</a><br/>
+    <a href="#" title="this is link">aaaa</a><br/>
+</div>
+</body>
+</html>

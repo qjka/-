@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天室</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-3.1.0.js"></script>
+    <script>
+        $(function(){
+            // 为按钮绑定click事件
+            $("#send").on("click",function(){
+                // 获取用户的输入内容
+                var msg = $("#message").val();
+                // 将输入内容追加到div#box中
+                $("<div>").append(msg).appendTo("#box");
+
+            
+                $("#box").scrollTop($("#box").prop("scrollHeight"));
+
+                // 清空输入框
+                $("#message").val(null);
+            });
+
+            // 为消息输入框绑定键盘事件
+            $("#message").on("keyup",function(e){
+                // 判断按下的键是不是Enter键 - keyCode == 13
+                if(e.keyCode == 13){
+                    $("#send").trigger("click");
+                }
+            });
+        });
+    </script>
+    <style>
+        #box{width:450px;height:100px; border:1px solid teal;overflow: auto}
+    </style>
+</head>
+<body class="container">
+<div class="panel panel-primary">
+    <div class="panel-heading">聊天室</div>
+    <div class="panel-body">
+        <div id="box"></div>
+        <input type="text" name="message" id="message" size="50"/>
+        <button class="btn btn-primary" id="send">提交</button>
+    </div>
+</div>
+</body>
+</html>

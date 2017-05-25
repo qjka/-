@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入jQuery的库-->
+    <script src="js/jquery-3.1.0.js"></script>
+    <script>
+        $(function(){
+            // 选择子元素
+//            $("#box p").css("color","red");
+
+            // 选择直接子元素
+//            $("#box > p").css("color","red");
+
+            // 并列
+//            $("#box > p, p.pp").css("color","red");
+
+            // +
+//            $("#p2 + p").css("color","red");
+            // ~
+            $("#p2 ~ p").css("color","red");
+        });
+    </script> 
+</head>
+<body>
+<p>段落1</p>
+<p id="p2">段落2</p>
+<p class="pp">段落3</p>
+<p>段落4</p>
+<p class="pp">段落5</p>
+<div id="box">
+    <p>outer p</p>
+    <div id="inner_box">
+        <p>inner p</p>
+    </div>
+</div>
+</body>
+</html>
