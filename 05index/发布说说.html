@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0}
+ul{ list-style:none}
+.wrap{ width:500px;font-size:14px; margin:50px auto}
+.countTxt{ display:block; text-align:right; padding-bottom:10px;}
+.countTxt em{ font-size: 16px; font-weight: bold; font-style: normal; padding: 0 5px}
+.countTxt .red{ color: red;}
+textarea{ padding:10px; display:block; width:480px; resize:none; height:100px; border:1px solid #ccc; font-size:14px}
+.commonBtn{ height:40px; width:100px; border:1px solid #ccc; margin:10px 0 0 380px}
+hr{ margin:20px 0}
+.talkList li{ border:1px solid #ccc; padding:25px 20px 20px; border-radius:10px; position:relative; margin-bottom:20px}
+.talkList li p{min-height:50px; margin-bottom:10px; word-break:break-all}
+.talkList li .toolsBar{ text-align:right}
+.talkList li .toolsBar span{ margin-left:20px; cursor:pointer}
+.talkList li time{ position:absolute; top:10px; right:15px; color:#ccc;}
+</style>
+
+</head>
+<script src="js/hxsd_tools.js"></script>
+<script src="js/common.js"></script>
+<script>
+documentReady(function(){
+	var oTextarea=document.getElementsByTagName("textarea")[0];//输入框
+	var countTxt=document.getElementsByClassName("countTxt")[0];//计字
+	var commonBtn=document.getElementsByClassName("commonBtn")[0];//发表按钮
+	var talkList=document.getElementsByClassName("talkList")[0];//列表
+	//输入框
+	common.textIn(oTextarea,140,countTxt,commonBtn);
+	inputText(commonBtn);
+	function inputText(obj){
+		obj.onclick=function(){
+			this.disabled=true;//发表后，按钮归零
+			if(oTextarea.value==""){
+				alert("请输入文字");
+			}else{
+				var oLi=document.createElement("li");
+				//获取时间
+				var oDate=new Date();
+				var time=oDate.getFullYear()+"-"+(oDate.getMonth()+1)+"-"+oDate.getDate();
+				//添加html
+				oLi.innerHTML="<p>"+oTextarea.value+"</p><div class='toolsBar' onselectstart='return false' style='-moz-user-select:none'><span>顶 <b>0</b></span><span>踩 <b>0</b></span></div><time>"+time+"</time>";
+				talkList.appendChild(oLi);
+				//清空输入框
+				oTextarea.value="";
+				countTxt.innerHTML="您还可以输入<em>"+140+"</em>字";
+//------------------------------------------------------------------------------------------
+				//顶和踩的操作				
+				var aSpan=oLi.getElementsByTagName("span");
+				for(var j=0; j<aSpan.length; j++){
+					aSpan[j].index=j
+					aSpan[j].n=0;
+					aSpan[j].onclick=function(ev){
+						ev=ev||event;
+						ev.cancelBubble=true;
+						var aB=this.getElementsByTagName("b")[0];
+						this.n++;
+						aB.innerHTML=this.n;
+						return false;
+					};
+				};
+			};
+		};
+	};
+});
+
+</script>
+<body>
+<div class="wrap">
+    <form>
+        <span class="countTxt">您还可以输入<em>140</em>字</span>
+        <textarea></textarea>
+        <button class="commonBtn" disabled type="button">发表说说</button>
+    </form>
+    <hr>
+    <ul class="talkList">
+        <!--<li>
+            <p>adsfa asdf asdf asdf</p>
+            <div class="toolsBar">
+                <span>顶 <b>0</b></span>
+                <span>踩 <b>0</b></span>
+            </div>
+            <time></time>
+        </li>-->
+    
+    </ul>
+
+</div>
+
+
+
+</body>
+</html>
