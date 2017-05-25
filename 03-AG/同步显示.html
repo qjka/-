@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/angular.js"></script>
+    <script>
+        // 创建主模块
+        angular.module("myapp",[]);
+
+        // 创建第一个控制器:不带第二个数组参数的module方法，是引用已经创建的模块
+        // 由框架负责创建的对象，我们需要的时候通过参数传入，这种方式，叫做“依赖注入”
+        angular.module("myapp").controller("myCtrl1",function($scope){
+            $scope.city = "北京"; // 如果赋了初值，相当于指定了默认值
+        });
+ 
+        angular.module("myapp").controller("myCtrl2",function($scope){
+        });
+    </script>
+</head>
+<body class="container" ng-app="myapp">
+<!--ngController:指定这一组DOM中的数据和显示，由框架中的指定控制器来管理-->
+<div class="panel panel-primary" ng-controller="myCtrl1">
+    <div class="panel-heading">显式数据绑定</div>
+    <div class="panel-body">
+        <!--显式数据绑定-->
+        请输入名称：<input type="text" ng-model="city"/><br>
+        <div>{{city}}</div>
+    </div>
+</div>
+
+<div class="panel panel-primary" ng-controller="myCtrl2">
+    <div class="panel-heading">隐式数据绑定</div>
+    <div class="panel-body">
+        <!--这里是隐式数据绑定-->
+        请输入名称：<input type="text" ng-model="city"/><br>
+        <div>{{city}}</div>
+    </div>
+</div>
+</body>
+</html>

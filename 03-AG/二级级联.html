@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/angular.js"></script>
+    <script>
+        angular.module("myapp",[])
+                .controller("myCtrl",function($scope){
+                    // key 1: 设计好数据结构  陕西
+                    $scope.data = [
+                        {province:"河南省",cities:["郑州市","开封市","洛阳市","安阳市"]},
+                        {province:"河北省",cities:["石家庄市","邢台市","衡水市"]},
+                        {province:"湖北省",cities:["武汉市","黄岗市","宜昌市"]}
+                    ];
+                }); 
+    </script>
+</head>
+<body class="container" ng-app="myapp" ng-controller="myCtrl">
+<div class="panel panel-primary">
+    <div class="panel-heading">级联菜单:{{province.province}},{{city}}</div>
+    <div class="panel-body">
+        <!--选择省份-->
+        <!--ng-options="值 as 文本 for 数组中某一项 in 数组"-->
+        <select ng-model="province" ng-options="item.province for item in data">
+            <option value="">--请选择您所在的省份--</option>
+        </select>
+        <!--选择城市-->
+        <select ng-model="city" ng-options="c for c in province.cities">
+            <option value="">--请选择您所在的城市--</option>
+        </select>
+    </div>
+</div>
+</body>
+</html>

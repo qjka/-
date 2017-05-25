@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/angular.js"></script>
+    <script>
+        /*
+         因为service对象是单实例的，所以在开发中，
+         经常使用service对象来在不同的控制器之间传递(共享)数据
+         */
+        // 创建一个主模块
+        angular.module("myapp", [])
+
+        // 创建一个单例的service对象
+
+                .factory("myService",function(){
+                    var data = {info:""};
+                    // 返回单例对象
+                    return data;
+                })
+        // 创建两个控制器
+
+                // 依赖注入myService service
+                .controller("myCtrl1",function($scope,myService){
+                    $scope.name = myService;
+                })
+                // 依赖注入myService service
+                .controller("myCtrl2",function($scope,myService){
+                    $scope.name = myService;
+                });
+    </script>
+</head>
+<body class="container" ng-app="myapp">
+<div class="panel panel-primary" ng-controller="myCtrl1">
+    <div class="panel-heading">第一个控制器</div>
+    <div class="panel-body"><input type="text" size="50" ng-model="name.info"></div>
+</div>
+
+<div class="panel panel-primary" ng-controller="myCtrl2">
+    <div class="panel-heading">第二个控制器</div>
+    <div class="panel-body">{{name.info}}</div>
+</div>
+</body>
+</html>

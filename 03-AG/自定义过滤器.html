@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--将DOM的管理交给Angular框架的myapp这个模块来负责-->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>自定义过滤器</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!--引入angular库-->
+    <script src="js/angular.js"></script>
+    <script>
+        angular.module("myapp",[])
+                // 注册一个过滤器
+                .filter("wordFilter",function(){
+                    return function (content){
+                        // 返回替换以后的内容
+//                        return content.replace(/猪/g,"很多羊肉串");
+                        // 敏感词过滤
+                        // 中**队   美**队  枪=>* 法轮功  台独
+//                        return content.replace(/国军|枪|台独|金三胖/g,"*");
+                        return content.replace(/国军|枪|台独|金三胖/g,function(word){
+                            var star = "";
+                            for(var i=0;i<word.length;i++){
+                                star += "*";
+                            }
+                            return star;
+                        });
+                    };
+                }) 
+                // 注册一个控制器
+                .controller("myCtrl",function($scope){
+                    $scope.content = "";
+                });
+    </script>
+</head>
+<body class="container" ng-app="myapp" ng-controller="myCtrl">
+<p class="well">
+    在实际应用中，我们会定义两种(作用)过滤器：<br />
+    1) 应用于一个数组，过滤出的结果是该数组的一个子集；<br />
+    2) 应用于任何内容，过滤出的结果是对原内容进行转换，甚至是毫不相干；
+</p>
+<div class="panel panel-primary">
+    <div class="panel-heading">自定义过滤器</div>
+    <div class="panel-body">
+        请输入任意内容：<input type="text" size="50" ng-model="content"/>
+        <p class="well text-info">
+            转换后的结果是：{{content | wordFilter}}
+        </p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="UTF-8">
+    <title>web站点入口页面</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.css"/>
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script>
+        // 创建主模块，并添加对路由模块的依赖
+        var myapp = angular.module("myapp",["ngRoute"]);
+
+        // 配置路由信息:需要注入$routeProvider service
+        myapp.config(function($routeProvider){
+            $routeProvider
+                    // 处理默认首页 
+                    .when("/",{templateUrl:"pages/home.html",controller:"homeCtrl"})
+                    .when("/home",{templateUrl:"pages/home.html",controller:"homeCtrl"})
+                    .when("/about",{templateUrl:"pages/about.html",controller:"aboutCtrl"})
+                    .when("/contact",{templateUrl:"pages/contact.html",controller:"contactCtrl"})
+                    .when("/contact/:subject",{templateUrl:"pages/contact.html",controller:"contactCtrl"})
+                    // 如果请求的路由不存在
+                    .otherwise({templateUrl:"pages/routeNotFound.html",controller:"notFoundCtrl"});
+        });
+
+        // 注册一些控制器(每个子页面一个)
+        myapp
+                .controller("homeCtrl",function($scope){
+                    $scope.message = "This is Home Page.";
+                })
+                .controller("aboutCtrl",function($scope){
+                    $scope.message = "This is About Page.";
+                })
+                .controller("contactCtrl",function($scope,$routeParams){
+                    $scope.message = "This is Contact Page.";
+
+                    // 解析路由参数：通过$routeParams对象来解析
+                    // 通过路由传过来的参数，会以"属性名:属性值"的方式保存到$routeParams
+                    // $routeParams{subject:"ask"}
+//                    var param = $routeParams["subject"];
+                    var param = $routeParams.subject;
+                    if(param=="tell"){
+                        $scope.subject = "我要购买你们的商品";
+                    }else if(param=="ask"){
+                        $scope.subject = "我要咨询";
+                    }
+                })
+                .controller("notFoundCtrl",function($scope){
+                    $scope.message = "This is File Not Found Page.";
+                });
+
+        // 顶层控制器-所有的子模板页面，共享同一个顶层控制器
+        myapp.controller("myCtrl",function($scope){
+            $scope.hello = "hello hello";
+        });
+    </script>
+</head>
+<body ng-app="myapp" ng-controller="myCtrl">
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">我的站点</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/home"><i class="fa fa-home"></i> 主页</a></li>
+                <li><a href="#/about"><i class="fa fa-shield"></i> 关于我们</a></li>
+                <li><a href="#/contact"><i class="fa fa-comment"></i> 联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div id="main">
+    <div ng-view></div>
+</div>
+
+</body>
+</html>
